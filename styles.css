@@ -1,0 +1,30 @@
+body    {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container  {
+    width: 400px;
+    border: 10px solid rgba(47,47,47,1);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.display    {
+    height: 150px;
+    width: 400px;
+}
+
+button  {
+    height: 100px;
+    width: 100px;
+}
+
+.buttons    {
+    display: flex;
+
+}
