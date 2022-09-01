@@ -1,4 +1,5 @@
 body    {
+    background-color: rgb(170, 164, 146);
     height: 90vh;
     display: flex;
     justify-content: center;
@@ -15,8 +16,12 @@ body    {
 }
 
 .display    {
+    position: relative;
     height: 150px;
     width: 400px;
+    font-size: 42px;
+    text-align: center;
+    background-color: rgb(206, 206, 206);
 }
 
 button  {
@@ -26,5 +31,12 @@ button  {
 
 .buttons    {
     display: flex;
+}
 
+#screen {
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0 20px 0 0;
 }
