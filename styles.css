@@ -34,9 +34,15 @@ button  {
 }
 
 #screen {
-
     position: absolute;
     bottom: 0;
     right: 0;
     margin: 0 20px 0 0;
+}
+
+#little-screen  {
+    text-align: end;
+    padding-right: 10px;
+    font-size: 20px;
+    margin-top: 50px;
 }
