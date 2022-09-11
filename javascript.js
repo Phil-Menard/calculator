@@ -1,3 +1,6 @@
+// ajoute un event listener pour récupérer les inputs clavier
+document.addEventListener('keydown', getInput);
+
 const buttons = document.getElementsByTagName('button');
 const clearButton = document.getElementById('clear');
 const screen = document.getElementById('screen');
@@ -13,22 +16,42 @@ let firstNumber = "";
 let secondNumber = "";
 
 // ajoute un event listener pour chaque bouton de la calculatrice
-buttonsArray.forEach(addEventListener('mousedown', displayText));
+for (let i = 0; i < buttonsArray.length; i++)   {
+    buttonsArray[i].addEventListener('mousedown', displayText);
+}
 
-// fonction pour afficher les chiffres sur l'écran
+// fonction pour afficher les calculs sur l'écran lorsque l'utilisateur clique sur un bouton
 function displayText(e)  {
 
     if (chiffres.includes(e.target.textContent))   {   // si le bouton cliqué est un chiffre
-        addNumber(e);
+        addNumber(e.target.textContent);
     }
     else if (e.target.textContent == clearButton.textContent)    {  // si le bouton cliqué est le bouton 'clear'
         clearScreen();
     }
     else if (operators.includes(e.target.textContent))  {   // si le bouton cliqué est un opérateur
-        setOperator(e);
+        setOperator(e.target.textContent);
     }
     else if (e.target.textContent == "=")   {   // si le bouton cliqué est '='
-        SetOperation();
+        setOperation();
+    }
+}
+
+// fonction pour afficher les calculs sur l'écran lorsque l'utilisateur appuie sur un bouton du clavier
+function getInput(e)    {
+    if (e.key == "Enter")   {
+        setOperation();
+    }
+    else if (chiffres.includes(e.key))  {
+        addNumber(e.key);
+    }
+    else if (operators.includes(e.key) || e.key == "*") {
+        if (e.key == "*")   {   
+            setOperator("x");
+        }
+        else    {
+            setOperator(e.key);
+        }            
     }
 }
 
@@ -44,29 +67,27 @@ function clearScreen()  {
 }
 
 // fonction pour ajouter un chiffre
-function addNumber(e)    { 
+function addNumber(value)    { 
     secondNumber = "";
 
     if (operators.includes(lastButtonPressed)) {   // si l'utilisateur a cliqué sur un opérateur ("+", "-", "x", "/") avant de cliquer sur ce bouton
-        screen.textContent = e.target.textContent;  // on remplace le nombre actuellement affiché sur l'écran par le nouveau chiffre choisi
-        lastButtonPressed = e.target.textContent;
+        screen.textContent = value;  // on remplace le nombre actuellement affiché sur l'écran par le nouveau chiffre choisi
+        lastButtonPressed = value;
     }
     else    {                               // SINON
         if (screen.textContent == "0")  {   // si l'écran affiche "0", on le remplace par le nouveau chiffre
-            screen.textContent = e.target.textContent;
-            lastButtonPressed = e.target.textContent;
+            screen.textContent = value;
+            lastButtonPressed = value;
         }
         else    {                           // sinon on ajoute le nouveau chiffre au chiffre déjà affiché sur l'écran
-            screen.textContent += e.target.textContent;
-            lastButtonPressed = e.target.textContent;
+            screen.textContent += value;
+            lastButtonPressed = value;
         }
     }        
 }
 
 // fonction qui lance l'éxécution de l'opération lorsque l'utilisateur clique sur "="
-function SetOperation() {
-    console.log("first number : " + firstNumber);
-    console.log("second number : " + secondNumber);
+function setOperation() {
 
     if (secondNumber == "") {
         secondNumber = screen.textContent;
@@ -91,9 +112,9 @@ function SetOperation() {
 
 
 // fonction qui stocke dans une variable quel opérateur a été choisi
-function setOperator(e)  { 
+function setOperator(value)  { 
     previousOperatorPressed = currentOperator;
-    currentOperator = e.target.textContent;
+    currentOperator = value;
     secondNumber = "";
     
     if (firstNumber == "")  {   // si le premier nombre n'a pas encore été choisi 
@@ -115,7 +136,7 @@ function setOperator(e)  {
             secondNumber = ""; 
         }
     }
-    lastButtonPressed = e.target.textContent;
+    lastButtonPressed = value;
 }
 
 
