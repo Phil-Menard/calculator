@@ -1,5 +1,6 @@
 body    {
-    background-color: rgb(170, 164, 146);
+    background-color: #f3dfc8;
+    font-family: Verdana, "Geneva", Tahoma, sans-serif;
     height: 90vh;
     display: flex;
     justify-content: center;
@@ -8,11 +9,12 @@ body    {
 
 .container  {
     width: 400px;
-    border: 10px solid rgba(47,47,47,1);
-    border-radius: 4px;
+    border: 2px solid #2e2a35;
+    border-radius: 20px;
+    padding: 16px 18px 16px 16px;
+    background: #494352;
     display: flex;
     flex-direction: column;
-
 }
 
 .display    {
@@ -21,16 +23,26 @@ body    {
     width: 400px;
     font-size: 42px;
     text-align: center;
-    background-color: rgb(206, 206, 206);
+    background-color: #A4B4C0;
+    border-radius: 8px;
+    padding-right: 2px;
+    box-shadow: inset 0px 1px 2px 1px #545c68;
 }
 
 button  {
     height: 100px;
     width: 100px;
+    background: #CDA474;
+    font-weight: 700;
+    font-size: 40px;
+    box-shadow: 0 3px #382c1f;
+    border-radius: 6px;
 }
 
 .buttons    {
     display: flex;
+    margin-top: 12px;
+    gap: 2px;
 }
 
 #screen {
@@ -38,6 +50,7 @@ button  {
     bottom: 0;
     right: 0;
     margin: 0 20px 0 0;
+    font-weight: 700;
 }
 
 #little-screen  {
@@ -45,4 +58,8 @@ button  {
     padding-right: 10px;
     font-size: 20px;
     margin-top: 50px;
+}
+
+#clear  {
+    background-color: #D25454;
 }

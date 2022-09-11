@@ -35,6 +35,9 @@ function displayText(e)  {
     else if (e.target.textContent == "=")   {   // si le bouton cliqué est '='
         setOperation();
     }
+    else if (e.target.textContent == "del") {
+        removeLastNumber();
+    }
 }
 
 // fonction pour afficher les calculs sur l'écran lorsque l'utilisateur appuie sur un bouton du clavier
@@ -53,8 +56,20 @@ function getInput(e)    {
             setOperator(e.key);
         }            
     }
+    else if (e.key == "Escape") {
+        clearScreen();
+    }
+    else if (e.key == "Backspace") {
+        removeLastNumber();
+    }
 }
 
+function removeLastNumber() {
+    if (chiffres.includes(lastButtonPressed))   {
+        let str = screen.textContent;
+        screen.textContent = str.slice(0, -1);
+    }
+}
 // fonction pour clear l'écran
 function clearScreen()  {
     screen.textContent = "0";
