@@ -48,6 +48,7 @@ button  {
 #screen {
     position: absolute;
     bottom: 0;
+    max-width: 370px;
     right: 0;
     margin: 0 20px 0 0;
     font-weight: 700;

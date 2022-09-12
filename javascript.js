@@ -23,7 +23,7 @@ for (let i = 0; i < buttonsArray.length; i++)   {
 // fonction pour afficher les calculs sur l'écran lorsque l'utilisateur clique sur un bouton
 function displayText(e)  {
 
-    if (chiffres.includes(e.target.textContent))   {   // si le bouton cliqué est un chiffre
+    if (chiffres.includes(e.target.textContent) || e.target.textContent == ".")   {   // si le bouton cliqué est un chiffre
         addNumber(e.target.textContent);
     }
     else if (e.target.textContent == clearButton.textContent)    {  // si le bouton cliqué est le bouton 'clear'
@@ -62,6 +62,9 @@ function getInput(e)    {
     else if (e.key == "Backspace") {
         removeLastNumber();
     }
+    else if (e.key == ".") {
+        addNumber(e.key);
+    }
 }
 
 function removeLastNumber() {
@@ -87,18 +90,23 @@ function addNumber(value)    {
 
     if (operators.includes(lastButtonPressed)) {   // si l'utilisateur a cliqué sur un opérateur ("+", "-", "x", "/") avant de cliquer sur ce bouton
         screen.textContent = value;  // on remplace le nombre actuellement affiché sur l'écran par le nouveau chiffre choisi
-        lastButtonPressed = value;
     }
-    else    {                               // SINON
-        if (screen.textContent == "0")  {   // si l'écran affiche "0", on le remplace par le nouveau chiffre
-            screen.textContent = value;
-            lastButtonPressed = value;
+    else    { 
+        if (screen.textContent.includes('.')) {
+            if (value != ".")   {
+                screen.textContent += value;
+            }
         }
-        else    {                           // sinon on ajoute le nouveau chiffre au chiffre déjà affiché sur l'écran
-            screen.textContent += value;
-            lastButtonPressed = value;
-        }
+        else    {
+            if (screen.textContent == "0")  {   // si l'écran affiche "0", on le remplace par le nouveau chiffre
+                screen.textContent = value;
+            }
+            else    {                           // sinon on ajoute le nouveau chiffre au chiffre déjà affiché sur l'écran
+                screen.textContent += value;
+            }
+        }                      
     }        
+    lastButtonPressed = value;
 }
 
 // fonction qui lance l'éxécution de l'opération lorsque l'utilisateur clique sur "="
