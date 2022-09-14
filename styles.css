@@ -61,6 +61,14 @@ button  {
     margin-top: 50px;
 }
 
-#clear  {
+#clear, #equal  {
     background-color: #D25454;
+}
+
+.spec   {
+    background-color: rgb(93, 161, 90);
+}
+
+.operators  {
+    background-color: rgb(105, 105, 156);
 }
