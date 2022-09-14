@@ -8,7 +8,7 @@ const littleScreen = document.getElementById('little-screen');
 
 const buttonsArray = Array.from(buttons);
 const chiffres = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-const operators = ["+", "-", "x", "/"];
+const operators = ["+", "-", "x", "/", "%"];
 let previousOperatorPressed = "C";
 let currentOperator = "";
 let lastButtonPressed = "";
@@ -38,6 +38,17 @@ function displayText(e)  {
     else if (e.target.textContent == "del") {
         removeLastNumber();
     }
+    else if (e.target.textContent == "+/-") {
+        changeSign();    }
+}
+
+function changeSign()  {
+    if (Math.sign(Number(screen.textContent)) == 1) {   // si le nombre affiché à l'écran est positif
+        screen.textContent = -Math.abs(Number(screen.textContent));
+    }
+    else if (Math.sign(Number(screen.textContent)) == -1) {   // si le nombre affiché à l'écran est négatif
+        screen.textContent = Math.abs(Number(screen.textContent));
+    }
 }
 
 // fonction pour afficher les calculs sur l'écran lorsque l'utilisateur appuie sur un bouton du clavier
@@ -62,9 +73,9 @@ function getInput(e)    {
     else if (e.key == "Backspace") {
         removeLastNumber();
     }
-    else if (e.key == ".") {
-        addNumber(e.key);
-    }
+     else if (e.key == ".") {
+         addNumber(e.key);
+     }
 }
 
 function removeLastNumber() {
@@ -102,7 +113,12 @@ function addNumber(value)    {
                 screen.textContent = value;
             }
             else    {                           // sinon on ajoute le nouveau chiffre au chiffre déjà affiché sur l'écran
-                screen.textContent += value;
+                if (value == "+/-") {
+                    changeSign();
+                }
+                else    {
+                    screen.textContent += value;
+                }
             }
         }                      
     }        
@@ -180,6 +196,10 @@ function divide(a, b)   {
     screen.textContent = a / b;
 }
 
+function modulo(a, b)   {
+    screen.textContent = a % b;
+}
+
 // fonction qui fait l'opération mathématique avec l'opérateur et les deux nombres en arguments
 function operate(operator, a, b)    {
 
@@ -192,6 +212,8 @@ function operate(operator, a, b)    {
             return multiply(a, b);
         case "/":
             return divide(a, b);
+        case "%":
+            return modulo(a, b);
         default: 
             console.log("Veuillez choisir +, -, x ou / pour l'opérateur");
     }
