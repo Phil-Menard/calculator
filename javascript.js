@@ -138,16 +138,27 @@ function setOperation() {
     else if (previousOperatorPressed != "=")   {        
         littleScreen.textContent = firstNumber + " " + currentOperator + " " + secondNumber;
         operate(currentOperator, Number(firstNumber), Number(secondNumber));   
+        if (screen.textContent.length > 10) {
+            roundNumber(15);
+        }
         firstNumber = screen.textContent;
     }
     else    {    
         littleScreen.textContent = firstNumber + " " + currentOperator + " " + secondNumber;
         operate(currentOperator, Number(firstNumber), Number(secondNumber));    
+        if (screen.textContent.length > 10) {
+            roundNumber(15)
+        }
         firstNumber = screen.textContent;
     }
     previousOperatorPressed = "=";
     lastButtonPressed = "=";
 }
+
+function roundNumber(number)    {
+    let temp = Number(screen.textContent);
+    screen.textContent = temp.toFixed(number);
+}  
 
 
 // fonction qui stocke dans une variable quel opérateur a été choisi
